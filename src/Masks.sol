@@ -31,7 +31,7 @@ contract Masks is ERC721 {
     }
 
     /**
-    * @dev Mints Masks
+    * @dev Add function to demonstrate the mitigation
     */
     function fixedMint(uint256 numberOfNfts) public payable {
         require(totalSupply < MAX_NFT_SUPPLY, "Sale has already ended");
