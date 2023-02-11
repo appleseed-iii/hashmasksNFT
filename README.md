@@ -6,13 +6,13 @@ This repo is meant to recreate the Hashmasks re-entrancy attack in order to have
 
 ## Background
 
-`src/Masks.sol` is a simplified copy of the [original Hashmasks contract](https://etherscan.io/address/0xc2c747e0f7004f9e8817db2ca4997657a7746928#code). One major change was the addition of the `fixedMint` function, which is meant to demonstrate the proper mitigation for this attack. We also reduced the `MAX_NFT_SUPPLY` for simplicity.
+- `src/Masks.sol` is a simplified copy of the [original Hashmasks contract](https://etherscan.io/address/0xc2c747e0f7004f9e8817db2ca4997657a7746928#code). One major change was the addition of the `fixedMint` function, which is meant to demonstrate the proper mitigation for this attack. We also reduced the `MAX_NFT_SUPPLY` for simplicity.
 
-`src/Exploiter.sol` is a custom exploit contract used to execute the re-entrancy attack vector
+- `src/Exploiter.sol` is a custom exploit contract used to execute the re-entrancy attack vector
 
-`test/Masks.t.sol` tests the attack vector and demonstrates the mitigation via `fixedMint`
+- `test/Masks.t.sol` tests the attack vector and demonstrates the mitigation via `fixedMint`
 
-The tests can be run with `forge test`
+- The tests can be run with `forge test`
 
 ## Learnings
 
