@@ -29,7 +29,7 @@ However, these checks occur before the `_safeMint()` iteration. The contract onl
 
 The simplest example is if we re-enter 2 times, which would mean `mintNFT(20)` is called 3 times. This means the `totalSupply` require checks are evaluated at totalSupply 0, 1 & 2, but ultimately the attacker mints 60 tokens. The below graphic demonstrates:
 
-![Reentrancy Process Graphic](./ReentrantGraphic.png)
+![Reentrancy Process Graphic](./imgs/ReentrantGraphic.png)
 
 ### `onERC721Received` callback can re-enter the mintNFT function. Reverts will revert EVERYTHING
 
