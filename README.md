@@ -34,3 +34,12 @@ The simplest example is if we re-enter 2 times, which would mean `mintNFT(20)` i
 ### `onERC721Received` callback can re-enter the mintNFT function. Reverts will revert EVERYTHING
 
 Of note, `test_ExploitFixed` proves that the re-entrancy is all one transaction & if it hits a revert all the mints will rollback. In the case of `test_ExploitFixed` the user will only be able to mint the `MAX_NFT_SUPPLY` = 25, but the additional re-entrancies attempt to keep minting above the MAX, as a result all the mints fail, the entire transaction rollsback ultimately the contract is left at a totalSupply of 0... as if nothing ever happened
+
+## Foundry setup for posterity
+
+```sh
+forge install --no-commit PaulRBerg/prb-test@0.3.1
+forge install transmissions11/solmate
+forge install OpenZeppelin/openzeppelin-contracts
+forge install foundry-rs/forge-std
+```
